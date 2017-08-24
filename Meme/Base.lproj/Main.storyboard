@@ -36,7 +36,11 @@
                                                         </connections>
                                                     </barButtonItem>
                                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="grR-2c-4Da"/>
-                                                    <barButtonItem systemItem="cancel" id="bhW-jn-Ygd"/>
+                                                    <barButtonItem systemItem="cancel" id="bhW-jn-Ygd">
+                                                        <connections>
+                                                            <action selector="canel:" destination="BYZ-38-t0r" id="aGG-ef-dWA"/>
+                                                        </connections>
+                                                    </barButtonItem>
                                                 </items>
                                             </toolbar>
                                         </subviews>

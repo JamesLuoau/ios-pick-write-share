@@ -33,6 +33,11 @@ class ViewController: UIViewController {
         unsubscribeFromKeyboardNotifications()
     }
     
+    @IBAction func canel(_ sender: UIBarButtonItem) {
+        imageView.image = nil
+        resetTextField()
+    }
+    
     @IBAction func pickAnImage(_ sender: UIBarButtonItem) {
         enum ImageSourceType: Int {
             case fromCamera = 0
@@ -95,6 +100,15 @@ class ViewController: UIViewController {
         
         topMemoTextField.delegate = self
         bottomTextField.delegate = self
+        
+        resetTextField()
+    }
+    
+    let TOP_TEXT_FIELD_TEXT = "TOP"
+    let BOTTOM_TEXT_FIELD_TEXT = "BOTTOM"
+    private func resetTextField() {
+        topMemoTextField.text = TOP_TEXT_FIELD_TEXT
+        bottomTextField.text = BOTTOM_TEXT_FIELD_TEXT
     }
     
     private func resignFirstResponderIfTextFieldsHasFocus() {
@@ -116,7 +130,7 @@ extension ViewController: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField.text == "TOP" || textField.text == "BOTTOM" {
+        if textField.text == TOP_TEXT_FIELD_TEXT || textField.text == BOTTOM_TEXT_FIELD_TEXT {
             textField.text = ""
         }
     }
