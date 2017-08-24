@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var topMemoTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var memeView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,8 +59,8 @@ class ViewController: UIViewController {
         // TODO: Hide toolbar and navbar
         
         // Render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        UIGraphicsBeginImageContext(self.memeView.frame.size)
+        memeView.drawHierarchy(in: self.memeView.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         

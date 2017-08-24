@@ -44,16 +44,42 @@
                                             <constraint firstAttribute="height" constant="40" id="klw-W8-pme"/>
                                         </constraints>
                                     </stackView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2nz-DR-kSm">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2nz-DR-kSm" userLabel="Meme View">
                                         <rect key="frame" x="0.0" y="40" width="320" height="372"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="elL-pQ-pbM">
-                                                <rect key="frame" x="0.0" y="-186" width="320" height="372"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="elL-pQ-pbM">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             </imageView>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="39v-PL-kvA" userLabel="Top Memo Text Field">
+                                                <rect key="frame" x="0.0" y="20" width="320" height="48"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="40"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                            </textField>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kFK-Xq-vOr" userLabel="Bottom Memo Text Field">
+                                                <rect key="frame" x="0.0" y="304" width="320" height="48"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="40"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="kFK-Xq-vOr" secondAttribute="bottom" constant="20" id="6qP-zL-7YW"/>
+                                            <constraint firstItem="39v-PL-kvA" firstAttribute="leading" secondItem="2nz-DR-kSm" secondAttribute="leading" id="B6o-dy-g6u"/>
+                                            <constraint firstItem="elL-pQ-pbM" firstAttribute="top" secondItem="2nz-DR-kSm" secondAttribute="top" id="JAx-Yk-BvS"/>
+                                            <constraint firstItem="39v-PL-kvA" firstAttribute="width" secondItem="2nz-DR-kSm" secondAttribute="width" id="Ptf-Uc-7s8"/>
+                                            <constraint firstItem="elL-pQ-pbM" firstAttribute="leading" secondItem="kFK-Xq-vOr" secondAttribute="leading" id="T86-3z-ITY"/>
+                                            <constraint firstAttribute="trailing" secondItem="elL-pQ-pbM" secondAttribute="trailing" id="aJI-jo-UPt"/>
+                                            <constraint firstItem="39v-PL-kvA" firstAttribute="top" secondItem="2nz-DR-kSm" secondAttribute="top" constant="20" id="buM-DR-c6n"/>
+                                            <constraint firstItem="elL-pQ-pbM" firstAttribute="height" secondItem="2nz-DR-kSm" secondAttribute="height" id="fy9-WO-Q50"/>
+                                            <constraint firstItem="kFK-Xq-vOr" firstAttribute="width" secondItem="2nz-DR-kSm" secondAttribute="width" id="uH8-V5-QtO"/>
+                                            <constraint firstItem="elL-pQ-pbM" firstAttribute="leading" secondItem="2nz-DR-kSm" secondAttribute="leading" id="zSF-37-R2W"/>
+                                            <constraint firstItem="elL-pQ-pbM" firstAttribute="width" secondItem="2nz-DR-kSm" secondAttribute="width" id="zxx-t3-RGC"/>
+                                        </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="GaT-db-Kif">
                                         <rect key="frame" x="0.0" y="412" width="320" height="40"/>
@@ -78,33 +104,13 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="39v-PL-kvA" userLabel="Top Memo Text Field">
-                                <rect key="frame" x="0.0" y="70" width="320" height="48"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="40"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kFK-Xq-vOr" userLabel="Bottom Memo Text Field">
-                                <rect key="frame" x="0.0" y="382" width="320" height="48"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="40"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="UoX-fm-6vj" secondAttribute="bottom" id="729-tu-RRE"/>
                             <constraint firstItem="UoX-fm-6vj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7aL-cf-IvW"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="UoX-fm-6vj" secondAttribute="bottom" id="BqP-ul-TY3"/>
-                            <constraint firstItem="39v-PL-kvA" firstAttribute="width" secondItem="UoX-fm-6vj" secondAttribute="width" id="V0T-db-QqP"/>
-                            <constraint firstItem="39v-PL-kvA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZHq-GM-0YG"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="kFK-Xq-vOr" secondAttribute="bottom" constant="50" id="aJ0-St-fB1"/>
                             <constraint firstItem="UoX-fm-6vj" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="c1Q-q5-Iw4"/>
-                            <constraint firstItem="kFK-Xq-vOr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="plZ-eO-oat"/>
-                            <constraint firstItem="kFK-Xq-vOr" firstAttribute="width" secondItem="UoX-fm-6vj" secondAttribute="width" id="tCa-dc-O9B"/>
-                            <constraint firstItem="39v-PL-kvA" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="uVa-WG-whS"/>
                             <constraint firstAttribute="trailing" secondItem="UoX-fm-6vj" secondAttribute="trailing" id="xiM-gD-hsq"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="UoX-fm-6vj" secondAttribute="bottom" id="zJY-6l-ptR"/>
                         </constraints>
@@ -113,6 +119,7 @@
                         <outlet property="bottomTextField" destination="kFK-Xq-vOr" id="26v-f1-T8o"/>
                         <outlet property="cameraButton" destination="iqt-5X-UUi" id="OlN-DU-xXQ"/>
                         <outlet property="imageView" destination="elL-pQ-pbM" id="w53-0H-2Py"/>
+                        <outlet property="memeView" destination="2nz-DR-kSm" id="ede-2i-9SO"/>
                         <outlet property="shareButton" destination="lT7-wV-DQm" id="qbH-ct-U9z"/>
                         <outlet property="topMemoTextField" destination="39v-PL-kvA" id="6b6-I5-5NK"/>
                     </connections>
