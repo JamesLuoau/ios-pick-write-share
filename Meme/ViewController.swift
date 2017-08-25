@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupTextFields()
+        setupUIStatus()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,6 +35,7 @@ class ViewController: UIViewController {
     
     @IBAction func canel(_ sender: UIBarButtonItem) {
         imageView.image = nil
+        shareButton.isEnabled = false
         resetTextField()
     }
     
@@ -56,7 +57,10 @@ class ViewController: UIViewController {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = ImageSourceType(rawValue: sender.tag)!.toUIImagePickerControllerSourceType()
         imagePicker.delegate = self
-        present(imagePicker, animated: true, completion: nil)
+        present(imagePicker, animated: true, completion: {
+            () -> Void in
+                self.shareButton.isEnabled = true
+        })
     }
     
     func generateMemedImage() -> UIImage {
@@ -72,6 +76,15 @@ class ViewController: UIViewController {
         resignFirstResponderIfTextFieldsHasFocus()
         
         let activityViewController = UIActivityViewController(activityItems: [generateMemedImage()], applicationActivities: nil)
+        activityViewController.completionWithItemsHandler = {
+            (_,successful,_,_) in
+            if successful{
+                let meme = Meme(topText: self.topMemoTextField.text!, bottomText: self.bottomTextField.text!, originalImage: self.imageView.image!, memedImage: self.generateMemedImage())
+                
+                // I guess this is for meme version 2
+                print(meme)
+            }
+        }
         if UIDevice.current.userInterfaceIdiom == .phone {
             present(activityViewController, animated: true, completion: nil)
         }else{
@@ -85,7 +98,7 @@ class ViewController: UIViewController {
         
     }
     
-    private func setupTextFields() {
+    private func setupUIStatus() {
         let memeTextAttributes:[String:Any] = [
             NSStrokeColorAttributeName: UIColor.black,
             NSForegroundColorAttributeName: UIColor.white,
@@ -99,6 +112,8 @@ class ViewController: UIViewController {
         }
         
         resetTextField()
+        
+        shareButton.isEnabled = false
     }
     
     let TOP_TEXT_FIELD_TEXT = "TOP"
