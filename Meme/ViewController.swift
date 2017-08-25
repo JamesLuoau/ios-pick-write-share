@@ -92,14 +92,11 @@ class ViewController: UIViewController {
             NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
             NSStrokeWidthAttributeName: -4.0]
         
-        topMemoTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        
-        topMemoTextField.textAlignment = .center
-        bottomTextField.textAlignment = .center
-        
-        topMemoTextField.delegate = self
-        bottomTextField.delegate = self
+        for textField in [topMemoTextField, bottomTextField] {
+            textField!.defaultTextAttributes = memeTextAttributes
+            textField!.textAlignment = .center
+            textField!.delegate = self
+        }
         
         resetTextField()
     }
@@ -141,7 +138,9 @@ extension ViewController: UITextFieldDelegate {
 
 extension ViewController {
     func keyboardWillShow(_ notification:Notification) {
-        view.frame.origin.y = 0 - getKeyboardHeight(notification)
+        if bottomTextField.isFirstResponder {
+            view.frame.origin.y = 0 - getKeyboardHeight(notification)
+        }
     }
     
     func keyboardWillHide(_ notification:Notification) {
