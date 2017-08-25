@@ -36,6 +36,8 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Access your photos to edit and share with others</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Access your camera to take picture and share with others</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
