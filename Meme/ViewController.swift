@@ -72,6 +72,16 @@ class ViewController: UIViewController {
         return memedImage
     }
     
+    func save() {
+        // Create the meme
+        let meme = Meme(topText: self.topMemoTextField.text!, bottomText: self.bottomTextField.text!, originalImage: self.imageView.image!, memedImage: self.generateMemedImage())
+        
+        // Add it to the memes array in the Application Delegate
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
+    }
+    
     @IBAction func shareMeme(_ sender: UIBarButtonItem) {
         resignFirstResponderIfTextFieldsHasFocus()
         
@@ -81,8 +91,8 @@ class ViewController: UIViewController {
             if successful{
                 let meme = Meme(topText: self.topMemoTextField.text!, bottomText: self.bottomTextField.text!, originalImage: self.imageView.image!, memedImage: self.generateMemedImage())
                 
-                // I guess this is for meme version 2
-                print(meme)
+                Meme.addMeme(meme: meme)
+                self.dismiss(animated: true, completion: nil)
             }
         }
         if UIDevice.current.userInterfaceIdiom == .phone {
@@ -197,9 +207,3 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
 
 }
 
-struct Meme {
-    var topText: String
-    var bottomText: String
-    var originalImage: UIImage
-    var memedImage: UIImage
-}
