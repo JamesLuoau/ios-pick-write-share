@@ -36,4 +36,36 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        editMeme(meme: self.memes[(indexPath as NSIndexPath).row])
+    }
+    
+    @IBAction func newMeme(_ sender: Any) {
+        editMeme(meme: Meme())
+//        edit1(meme: Meme())
+    }
+    
+    private func editMeme(meme: Meme) {
+        let navigationController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditNavigationController") as! UINavigationController
+        navigationController.isToolbarHidden = false
+        let detailController = navigationController.viewControllers[0] as! MemeEditViewController
+        detailController.meme = meme
+        self.navigationController!.present(navigationController, animated: true, completion: nil)
+//        detailController.present(detailController, animated: true, completion: nil)
+//        self.navigationController!.pushViewController(detailController, animated: true)
+    }
+    
+    private func edit1(meme: Meme) {
+        self.tabBarController?.tabBar.isHidden = true
+        let navigationController = self.storyboard!.instantiateViewController(withIdentifier: "newOrEditMemeNavigationController") as! UINavigationController
+        let detailController = navigationController.viewControllers[0]
+//        detailController.meme = meme
+                self.navigationController!.present(navigationController, animated: true, completion: nil)
+        //        detailController.present(detailController, animated: true, completion: nil)
+//        self.navigationController!.pushViewController(detailController, animated: true)
+//        self.present(navigationController, animated: true, completion: nil)
+
+    
+    }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MemeEditViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var memeView: UIView!
     
+    var meme: Meme!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,19 +26,24 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        self.tabBarController?.tabBar.isHidden = true
+//        self.navigationController?.isToolbarHidden = true
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         
         subscribeToKeyboardNotifications()
+        
+        loadFromMeme(meme: meme)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
+//        self.tabBarController?.tabBar.isHidden = false
     }
     
     @IBAction func canel(_ sender: UIBarButtonItem) {
-        imageView.image = nil
-        shareButton.isEnabled = false
-        resetTextField()
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func pickAnImage(_ sender: UIBarButtonItem) {
@@ -73,13 +80,9 @@ class ViewController: UIViewController {
     }
     
     func save() {
-        // Create the meme
         let meme = Meme(topText: self.topMemoTextField.text!, bottomText: self.bottomTextField.text!, originalImage: self.imageView.image!, memedImage: self.generateMemedImage())
         
-        // Add it to the memes array in the Application Delegate
-        let object = UIApplication.shared.delegate
-        let appDelegate = object as! AppDelegate
-        appDelegate.memes.append(meme)
+        Meme.addMeme(meme: meme)
     }
     
     @IBAction func shareMeme(_ sender: UIBarButtonItem) {
@@ -89,9 +92,7 @@ class ViewController: UIViewController {
         activityViewController.completionWithItemsHandler = {
             (_,successful,_,_) in
             if successful{
-                let meme = Meme(topText: self.topMemoTextField.text!, bottomText: self.bottomTextField.text!, originalImage: self.imageView.image!, memedImage: self.generateMemedImage())
-                
-                Meme.addMeme(meme: meme)
+                self.save()
                 self.dismiss(animated: true, completion: nil)
             }
         }
@@ -121,16 +122,13 @@ class ViewController: UIViewController {
             textField!.delegate = self
         }
         
-        resetTextField()
-        
         shareButton.isEnabled = false
     }
     
-    let TOP_TEXT_FIELD_TEXT = "TOP"
-    let BOTTOM_TEXT_FIELD_TEXT = "BOTTOM"
-    private func resetTextField() {
-        topMemoTextField.text = TOP_TEXT_FIELD_TEXT
-        bottomTextField.text = BOTTOM_TEXT_FIELD_TEXT
+    private func loadFromMeme(meme: Meme) {
+        topMemoTextField.text = meme.topText
+        bottomTextField.text = meme.bottomText
+        imageView.image = meme.originalImage
     }
     
     private func resignFirstResponderIfTextFieldsHasFocus() {
@@ -145,14 +143,14 @@ class ViewController: UIViewController {
 
 // MARK: UITextFieldDelegate
 
-extension ViewController: UITextFieldDelegate {
+extension MemeEditViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField.text == TOP_TEXT_FIELD_TEXT || textField.text == BOTTOM_TEXT_FIELD_TEXT {
+        if textField.text == Meme.TOP_TEXT_DEFAULT || textField.text == Meme.BOTTOM_TEXT_DEFAULT {
             textField.text = ""
         }
     }
@@ -161,7 +159,7 @@ extension ViewController: UITextFieldDelegate {
 
 // MARK: Keyboard Functions
 
-extension ViewController {
+extension MemeEditViewController {
     func keyboardWillShow(_ notification:Notification) {
         if bottomTextField.isFirstResponder {
             view.frame.origin.y = 0 - getKeyboardHeight(notification)
@@ -191,7 +189,7 @@ extension ViewController {
 
 // MARK: UIImagePickerControllerDelegate & UINavigationControllerDelegate
 
-extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension MemeEditViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
@@ -199,7 +197,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage {
-            imageView.image = image
+            self.meme.originalImage = image
         }
         
         dismiss(animated: true, completion: nil)

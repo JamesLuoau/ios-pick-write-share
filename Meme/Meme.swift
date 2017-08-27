@@ -9,15 +9,20 @@
 import Foundation
 import UIKit
 
+
 struct Meme {
-    var topText: String
-    var bottomText: String
-    var originalImage: UIImage
-    var memedImage: UIImage
+    var topText: String = TOP_TEXT_DEFAULT
+    var bottomText: String = BOTTOM_TEXT_DEFAULT
+    var originalImage: UIImage? = nil
+    var memedImage: UIImage? = nil
 }
 
 
 extension Meme {
+    
+    static let TOP_TEXT_DEFAULT = "TOP"
+    static let BOTTOM_TEXT_DEFAULT = "BOTTOM"
+
 
     static func sharedMemes() -> [Meme] {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
