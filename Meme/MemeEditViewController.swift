@@ -64,10 +64,7 @@ class MemeEditViewController: UIViewController {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = ImageSourceType(rawValue: sender.tag)!.toUIImagePickerControllerSourceType()
         imagePicker.delegate = self
-        present(imagePicker, animated: true, completion: {
-            () -> Void in
-                self.shareButton.isEnabled = true
-        })
+        present(imagePicker, animated: true, completion: nil)
     }
     
     func generateMemedImage() -> UIImage {
@@ -80,9 +77,15 @@ class MemeEditViewController: UIViewController {
     }
     
     func save() {
-        let meme = Meme(topText: self.topMemoTextField.text!, bottomText: self.bottomTextField.text!, originalImage: self.imageView.image!, memedImage: self.generateMemedImage())
+        self.meme.topText = self.topMemoTextField.text!
+        self.meme.bottomText = self.bottomTextField.text!
+        self.meme.originalImage = self.imageView.image!
+        self.meme.memedImage = self.generateMemedImage()
         
-        Meme.addMeme(meme: meme)
+        if self.meme.isNew {
+            self.meme.isNew = false
+            Meme.addMeme(meme: meme)
+        }
     }
     
     @IBAction func shareMeme(_ sender: UIBarButtonItem) {
@@ -121,8 +124,11 @@ class MemeEditViewController: UIViewController {
             textField!.textAlignment = .center
             textField!.delegate = self
         }
-        
-        shareButton.isEnabled = false
+        updateShareButtonStatus()
+    }
+    
+    func updateShareButtonStatus() {
+        shareButton.isEnabled = self.meme.originalImage != nil
     }
     
     private func loadFromMeme(meme: Meme) {
@@ -139,6 +145,17 @@ class MemeEditViewController: UIViewController {
             bottomTextField.resignFirstResponder()
         }
     }
+}
+
+extension MemeEditViewController {
+
+    class func editMeme(meme: Meme, parentNavigationController: UINavigationController) {
+        let navigationController = parentNavigationController.storyboard!.instantiateViewController(withIdentifier: "MemeEditNavigationController") as! UINavigationController
+        let detailController = navigationController.viewControllers[0] as! MemeEditViewController
+        detailController.meme = meme
+        parentNavigationController.present(navigationController, animated: true, completion: nil)
+    }
+    
 }
 
 // MARK: UITextFieldDelegate
@@ -198,6 +215,7 @@ extension MemeEditViewController: UIImagePickerControllerDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage {
             self.meme.originalImage = image
+            self.updateShareButtonStatus()
         }
         
         dismiss(animated: true, completion: nil)

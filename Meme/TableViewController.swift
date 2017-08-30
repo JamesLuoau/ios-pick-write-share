@@ -27,7 +27,7 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MemeTableCell")!
         let meme = memes[(indexPath as NSIndexPath).row]
         
-        cell.textLabel?.text = meme.topText + " " + meme.bottomText
+        cell.textLabel?.text = meme.description()
         cell.imageView?.image = meme.memedImage
         
         return cell
@@ -43,29 +43,10 @@ class TableViewController: UITableViewController {
     
     @IBAction func newMeme(_ sender: Any) {
         editMeme(meme: Meme())
-//        edit1(meme: Meme())
     }
     
     private func editMeme(meme: Meme) {
-        let navigationController = self.storyboard!.instantiateViewController(withIdentifier: "MemeEditNavigationController") as! UINavigationController
-        navigationController.isToolbarHidden = false
-        let detailController = navigationController.viewControllers[0] as! MemeEditViewController
-        detailController.meme = meme
-        self.navigationController!.present(navigationController, animated: true, completion: nil)
-//        detailController.present(detailController, animated: true, completion: nil)
-//        self.navigationController!.pushViewController(detailController, animated: true)
+        MemeEditViewController.editMeme(meme: meme, parentNavigationController: self.navigationController!)
     }
     
-    private func edit1(meme: Meme) {
-        self.tabBarController?.tabBar.isHidden = true
-        let navigationController = self.storyboard!.instantiateViewController(withIdentifier: "newOrEditMemeNavigationController") as! UINavigationController
-        let detailController = navigationController.viewControllers[0]
-//        detailController.meme = meme
-                self.navigationController!.present(navigationController, animated: true, completion: nil)
-        //        detailController.present(detailController, animated: true, completion: nil)
-//        self.navigationController!.pushViewController(detailController, animated: true)
-//        self.present(navigationController, animated: true, completion: nil)
-
-    
-    }
 }
