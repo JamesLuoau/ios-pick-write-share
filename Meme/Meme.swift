@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class Meme {
+struct Meme {
     var isNew: Bool = true
     var topText: String = TOP_TEXT_DEFAULT
     var bottomText: String = BOTTOM_TEXT_DEFAULT

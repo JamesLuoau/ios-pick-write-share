@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MemeEditViewController.swift
 //  Meme
 //
 //  Created by James Luo on 22/8/17.
@@ -27,8 +27,6 @@ class MemeEditViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.tabBarController?.tabBar.isHidden = true
-//        self.navigationController?.isToolbarHidden = true
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         
         subscribeToKeyboardNotifications()
@@ -39,7 +37,6 @@ class MemeEditViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
-//        self.tabBarController?.tabBar.isHidden = false
     }
     
     @IBAction func canel(_ sender: UIBarButtonItem) {

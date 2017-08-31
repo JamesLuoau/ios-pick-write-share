@@ -300,6 +300,39 @@
             </objects>
             <point key="canvasLocation" x="2000.625" y="213.75"/>
         </scene>
+        <!--Meme Detail View Controller-->
+        <scene sceneID="Qyo-yQ-vQS">
+            <objects>
+                <viewController storyboardIdentifier="MemeDetailViewController" id="SSP-Vl-uBY" userLabel="Meme Detail View Controller" customClass="MemeDetailViewController" customModule="Meme" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="K1O-dp-ZLK"/>
+                        <viewControllerLayoutGuide type="bottom" id="SoP-vl-LkM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5GS-m2-Cv4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A54-IO-ZOU">
+                                <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SoP-vl-LkM" firstAttribute="top" secondItem="A54-IO-ZOU" secondAttribute="bottom" id="GQa-B6-kwo"/>
+                            <constraint firstItem="A54-IO-ZOU" firstAttribute="top" secondItem="K1O-dp-ZLK" secondAttribute="bottom" id="Jck-GF-70G"/>
+                            <constraint firstAttribute="trailing" secondItem="A54-IO-ZOU" secondAttribute="trailing" id="WgO-yb-ils"/>
+                            <constraint firstItem="A54-IO-ZOU" firstAttribute="leading" secondItem="5GS-m2-Cv4" secondAttribute="leading" id="daQ-VO-Gpu"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="A54-IO-ZOU" id="0q4-ug-Qxa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aV3-3Z-PUj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2063" y="1035"/>
+        </scene>
     </scenes>
     <resources>
         <image name="collection" width="30" height="30"/>

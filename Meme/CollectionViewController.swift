@@ -56,15 +56,14 @@ class CollectionViewController: UICollectionViewController {
     }
     
     @IBAction func newMeme(_ sender: Any) {
-        editMeme(meme: Meme())
+        let newMeme = Meme()
+        MemeEditViewController.editMeme(meme: newMeme, parentNavigationController: self.navigationController!)
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath:IndexPath) {
-        editMeme(meme: self.memes[(indexPath as NSIndexPath).row])
+        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "MemeDetailViewController") as! MemeDetailViewController
+        detailController.meme = self.memes[(indexPath as NSIndexPath).row]
+        self.navigationController!.pushViewController(detailController, animated: true)
     }
     
-    private func editMeme(meme: Meme) {
-        MemeEditViewController.editMeme(meme: meme, parentNavigationController: self.navigationController!)
-    }
-
 }

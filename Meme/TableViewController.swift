@@ -13,6 +13,7 @@ class TableViewController: UITableViewController {
     var memes: [Meme] = []
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         memes = Meme.sharedMemes()
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
@@ -38,15 +39,13 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        editMeme(meme: self.memes[(indexPath as NSIndexPath).row])
+        let meme = self.memes[(indexPath as NSIndexPath).row]
+        MemeDetailViewController.showMeme(meme: meme, parentNavigationController: self.navigationController!)
     }
     
     @IBAction func newMeme(_ sender: Any) {
-        editMeme(meme: Meme())
-    }
-    
-    private func editMeme(meme: Meme) {
-        MemeEditViewController.editMeme(meme: meme, parentNavigationController: self.navigationController!)
+        let newMeme = Meme()
+        MemeEditViewController.editMeme(meme: newMeme, parentNavigationController: self.navigationController!)
     }
     
 }
